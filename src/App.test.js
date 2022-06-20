@@ -1,8 +1,9 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import React from 'react';
+import { render } from '@testing-library/react';
+import Error from './pages/Error';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+test('404 page back-home button goes to correct url', () => {
+    const { getByTestId } = render(<Error />);
+    const button = getByTestId('back-home');
+    expect(button.href).toContain('http://localhost');
 });
