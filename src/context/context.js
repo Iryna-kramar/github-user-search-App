@@ -1,8 +1,4 @@
 import React, { useState, useEffect } from "react";
-import mockUser from "./mockData.js/mockUser";
-import mockRepos from "./mockData.js/mockRepos";
-import mockFollowers from "./mockData.js/mockFollowers";
-import { MdRoofing } from "react-icons/md";
 
 const axios = require("axios").default;
 axios.defaults.baseURL = "https://api.github.com";
@@ -13,7 +9,6 @@ const GithubProvider = ({ children }) => {
   const [githubUser, setGithubUser] = useState([]);
   const [repos, setRepos] = useState([]);
   const [followers, setFollowers] = useState([]);
-  const [requests, setRequests] = useState(0);
 
 
   const searchGithubUser = async (user) => {
@@ -54,7 +49,6 @@ const GithubProvider = ({ children }) => {
       .get('/rate_limit')
       .then(({ data }) => {
         let { remaining } = data.rate;
-        setRequests(remaining);
         console.log("getRemainingRequests", remaining);
         if (remaining === 0) {
         }
@@ -66,7 +60,7 @@ const GithubProvider = ({ children }) => {
 
   return (
     <GithubContext.Provider
-      value={{ githubUser, repos, followers, requests, searchGithubUser }}
+      value={{ githubUser, repos, followers, searchGithubUser }}
     >
       {children}
     </GithubContext.Provider>

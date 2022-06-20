@@ -5,7 +5,7 @@ import { GithubContext } from "../context/context";
 
 const Search = () => {
   const [user, setUser] = useState("");
-  const { requests: remainingRequest, searchGithubUser } =
+  const { requests: searchGithubUser } =
     useContext(GithubContext);
 
   const handleSubmit = (e) => {
@@ -31,7 +31,7 @@ const Search = () => {
             <button type="submit">Search</button>
           </div>
         </form>
-        <h3> {remainingRequest}/60</h3>
+
       </Wrapper>
     </section>
   );
@@ -40,7 +40,6 @@ const Search = () => {
 const Wrapper = styled.div`
   position: relative;
   display: grid;
-  gap: 1rem 1.75rem;
   @media (min-width: 768px) {
     grid-template-columns: 1fr max-content;
     align-items: center;
