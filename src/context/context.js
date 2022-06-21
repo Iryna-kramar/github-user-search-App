@@ -9,7 +9,7 @@ const GithubProvider = ({ children }) => {
   const [githubUser, setGithubUser] = useState([]);
   const [repos, setRepos] = useState([]);
   const [followers, setFollowers] = useState([]);
-
+  const [requests, setRequests] = useState(0);
 
   const searchGithubUser = async (user) => {
     const response = await axios
@@ -46,9 +46,10 @@ const GithubProvider = ({ children }) => {
 
   const getRemainingRequests = () => {
     axios
-      .get('/rate_limit')
+      .get("/rate_limit")
       .then(({ data }) => {
         let { remaining } = data.rate;
+        setRequests(remaining);
         console.log("getRemainingRequests", remaining);
         if (remaining === 0) {
         }
@@ -60,7 +61,7 @@ const GithubProvider = ({ children }) => {
 
   return (
     <GithubContext.Provider
-      value={{ githubUser, repos, followers, searchGithubUser }}
+      value={{ githubUser, repos, followers, requests, searchGithubUser }}
     >
       {children}
     </GithubContext.Provider>

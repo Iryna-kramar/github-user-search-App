@@ -5,7 +5,7 @@ import { GithubContext } from "../context/context";
 
 const Search = () => {
   const [user, setUser] = useState("");
-  const { requests: searchGithubUser } =
+  const { requests: remainingRequest, searchGithubUser } =
     useContext(GithubContext);
 
   const handleSubmit = (e) => {
@@ -31,7 +31,6 @@ const Search = () => {
             <button type="submit">Search</button>
           </div>
         </form>
-
       </Wrapper>
     </section>
   );
